@@ -1,5 +1,4 @@
 # sat-solver-jih332
-sat-solver-jih332 created by GitHub Classroom  
 
 This is an instruction of how to run my program, also a update log recording problems encountered.  
 You should be able to run my program by simply typing  
