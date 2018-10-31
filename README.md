@@ -27,18 +27,16 @@ addVertex: 24054times in 363ms
 appendClause: 24054times in 263ms
 ~~~~
 As a comparision, the previous version takes 9817ms.  
-However, it's still not fast enough.  
 
 ----
 
 12/09/2017  
-A VSIDS version using heap sort. It doesn't improve the performance, however.  
-It seems that backtrack() can be further simplified, initial scores of vars can be set to their adjacency_list.size(), respectively. Work on this later.  
+A VSIDS version using heap sort.  
 
 ----
 
 12/07/2017  
-Add VSIDS heuristics for CDCL (based on previous version). However, it even becomes slower on some benchmarks, compared to the previous version. It gives the correct results, although.  
+Add VSIDS heuristics for CDCL (based on previous version). However, it even becomes slower on some benchmarks, compared to the previous version.   
 The results from *engine_4.cnf* (contains 6944 vars and 66654 cls):  
 ~~~~
 UNKNOWN due to time_limit  
@@ -53,8 +51,7 @@ buildAdjlist: 1times in 47ms
 learn: 51times in 402ms  
 makeDecision: 272times in 12919ms`  
 ~~~~
-shows that when there're many variables, makeDecision() could be expensive, and the time of calling it is much more than conflicts encountered. Hence, we may use heap sort to maintain a copy of literal_scores in descending order, then update it only a conflict has happened.   
-By the way, the performance of assigning decision value by randomly choosing from 0 and 1 is pretty unstable. Trying to get rid of it.  
+shows that when there're many variables, makeDecision() could be expensive, and the time of calling it is much more than conflicts encountered. Hence, we may use heap sort to maintain a copy of literal_scores in descending order, then update it only a conflict has happened.     
 
 ----
 
@@ -65,19 +62,7 @@ Add adjacency list associated with each literals to speed up appending clause, n
 
 12/05/2017  
 Specifys the int type for member variable, i.e., int8_t, int16_t or int32_t are used, instead of int.  
-And I found that the program spends most running time in function: appendClause(), specifically, 20417ms out of 31807ms when runs on graph-ordering-8. Seems like building a adjacent list would help a lot, however, this may exceed the memory requirement.  
-
-----
-
-12/04/2017  
-It seems that although those log writting can be disabled, the program still spends a lot of time running on these disabled clog sentences. I made a non-log version, which is much more faster than before. As a comparision, the old version takes about 21000 - 23000ms running on graph-ordering-7, the new version only takes 1900 - 2300ms (since now the decision value is arbitrary chosen from 0 and 1, the running time may vary a little bit, the learning outcome may also vary if you run it several times).  
-I also included the Makefile this time. You only need to run `make` as a command line in corresponding directory. Then you will get *solver.exe*, to run it, use command line and type `solver`, and you'll see a brief instruction.  
-
-----
-
-11/17/2017  
-It seems that there's no bug in my CDCL, the detail running information can be found in the *graph-ordering-3.log* I provided.  
-The required output for several .cnf files (not all the benchmarks) are included in *conflict.txt*.  
+The program spends most running time in function: appendClause(), specifically, 20417ms out of 31807ms when runs on graph-ordering-8. Seems like building a adjacent list would help a lot, however, this may exceed the memory requirement.  
 
 ----
 
@@ -109,8 +94,6 @@ The program will ask for filename as input(without .cnf as a suffix).
 Provided an option of whether to write log during running the program (recommended). The log will be written to filename.log, at current folder. The log will tell you the detail information about the whole procedure.  
 
 The results of all the benchmarks in *sat-benchmarks-master\petite* are recorded in *Results.txt*.  
-
-There's another version of this, which can read all the files in a certain folder one by one. However, there're still some bugs, which lead to the program end with no reason. It might concern the memory management of STL container. Hence, I only upload this version.  
 
 ----
 
