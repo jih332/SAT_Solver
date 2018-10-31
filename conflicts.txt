@@ -1,0 +1,46 @@
+the first conflicts encountered by my CDCL on several .cnf files are shown below. More details infomation can be found in 
+the .log file I uploaded. It should suffice to show the correctness of my CDCL. 
+
+
+graph-ordering-3:
+the current decision level is:1
+conflict clause: (var@decisionlevel)
+3@dl_1 2@dl_1 4@dl_1 
+should backtrack to 0 level, since the reason lies only on decision level: 1
+the second highest decision level is: 0
+the learned clause is: 
+4
+
+
+graph-ordering-5:
+the current decision level is:3
+the conflict clause is:
+5@dl_3 9@dl_2 13@dl_3 17@dl_3 
+the second highest decision level is: 2
+the learned clause is:
+9 10 1 -3 
+
+graph-ordering-13:
+the current decision level is:35
+the conflict clause is:
+3@dl_3 15@dl_15 27@dl_15 52@dl_31 64@dl_32 76@dl_33 88@dl_19 100@dl_35 112@dl_9 124@dl_22 136@dl_11 148@dl_35 
+the second highest decision level is: 33
+the learned clause is:
+3 15 27 52 64 76 88 112 124 136 12 24 36 96 120 132 144 8 20 32 44 92 117 129 141 -40 -41 -42 
+
+
+graph-ordering-alt-5:
+no conflict encountered.
+
+
+total-order-19:
+the current decision level is:24
+the conflict clause is:
+36@dl_24 330@dl_24 92@dl_20 
+the second highest decision level is: 23
+the learned clause is:
+-92 18 72 90 126 180 198 216 234 288 306 324 -103 -98 -97 -93 258 5 23 41 59 77 114 132 150 168 186 204 222 240 276 294 312 
+
+
+total-order-alt-19:
+no conflict encountered.
